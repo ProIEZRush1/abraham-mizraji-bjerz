@@ -45,5 +45,10 @@ chmod -R ug+rwX storage bootstrap/cache "$DB_DIR" 2>/dev/null || true
 # 5. Cache config (uses the exported APP_KEY). Best effort.
 php artisan config:cache || true
 
-# 6. Serve via FrankenPHP, replacing the shell as PID 1.
-exec frankenphp run --config /etc/caddy/Caddyfile
+# 6. Serve under an auto-respawn loop: if a request ever crashes the dev server, it restarts
+#    immediately, so the app is never permanently down (no `set -e`, so the loop always continues).
+while true; do
+    php artisan serve --host 0.0.0.0 --port 8080
+    echo "[entrypoint] server exited (code $?); restarting in 1s..."
+    sleep 1
+done
