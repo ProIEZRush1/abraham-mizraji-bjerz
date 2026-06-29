@@ -5,11 +5,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    $site = json_decode(file_get_contents(resource_path('content.json')), true);
-
-    return Inertia::render('Home', ['site' => $site]);
-});
+// This is an admin/management system: the root goes straight to the client's panel (login if needed),
+// never a generic marketing page. (Authenticated → /dashboard; otherwise the auth middleware → /login.)
+Route::get('/', fn () => redirect()->route('dashboard'));
 
 // Lightweight health probe the deploy pipeline hits to verify the LIVE app + database are up,
 // migrations ran and the admin was seeded (users >= 1). Public on purpose.
