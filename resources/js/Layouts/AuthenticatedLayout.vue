@@ -24,6 +24,20 @@ const brandInitials = computed(() => {
 const userName = computed(() => page.props.auth?.user?.name ?? '');
 const userEmail = computed(() => page.props.auth?.user?.email ?? '');
 
+// Entradas de menú aportadas por las capacidades instaladas.
+// Cada entrada: { label, href, icon }. Se comparten vía Inertia (prop 'capabilities').
+const capabilities = computed(() =>
+    Array.isArray(page.props.capabilities) ? page.props.capabilities : [],
+);
+
+// Marca como activa la capacidad cuya href coincide con la ruta actual.
+const isCapabilityActive = (href) => {
+    if (!href) return false;
+    const current = (page.url || '').split('?')[0];
+    const target = href.split('?')[0];
+    return current === target || current.startsWith(target + '/');
+};
+
 const userInitials = computed(() => {
     const name = (userName.value || '').trim();
     if (!name) return '?';
@@ -86,7 +100,24 @@ const userInitials = computed(() => {
                     </svg>
                     Inicio
                 </Link>
-                <!-- El menú se amplía por cliente según los módulos instalados. -->
+
+                <!-- Capacidades instaladas (el menú se amplía por cliente según los módulos). -->
+                <Link
+                    v-for="item in capabilities"
+                    :key="item.href"
+                    :href="item.href"
+                    :class="[
+                        'flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition',
+                        isCapabilityActive(item.href)
+                            ? 'bg-gradient-to-r from-[#7c3aed] to-[#c026d3] text-white shadow-md shadow-fuchsia-500/20'
+                            : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900',
+                    ]"
+                >
+                    <span class="flex h-5 w-5 items-center justify-center text-base leading-none">
+                        {{ item.icon }}
+                    </span>
+                    {{ item.label }}
+                </Link>
             </nav>
 
             <!-- Footer credit -->
@@ -202,6 +233,14 @@ const userInitials = computed(() => {
                         :active="route().current('dashboard')"
                     >
                         Inicio
+                    </ResponsiveNavLink>
+                    <ResponsiveNavLink
+                        v-for="item in capabilities"
+                        :key="item.href"
+                        :href="item.href"
+                        :active="isCapabilityActive(item.href)"
+                    >
+                        <span class="mr-2">{{ item.icon }}</span>{{ item.label }}
                     </ResponsiveNavLink>
                 </div>
                 <div class="border-t border-slate-200 px-4 py-4">
