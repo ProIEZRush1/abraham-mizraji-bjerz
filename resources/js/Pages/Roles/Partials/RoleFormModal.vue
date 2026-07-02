@@ -96,7 +96,7 @@ const submit = () => {
                                 type="checkbox"
                                 :checked="form.permission_ids.includes(permission.id)"
                                 @change="togglePermission(permission.id)"
-                                class="rounded border-slate-300 text-[#7c3aed] focus:ring-[#7c3aed]"
+                                class="rounded border-slate-300 text-[#92400e] focus:ring-[#92400e]"
                             />
                             <span class="text-sm text-slate-700">{{ permission.label }}</span>
                         </label>

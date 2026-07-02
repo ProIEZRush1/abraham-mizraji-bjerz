@@ -21,8 +21,8 @@ const props = defineProps({
 const form = useForm({
     business_name: props.settings.business_name ?? '',
     logo_url: props.settings.logo_url ?? '',
-    brand_color_primary: props.settings.brand_color_primary ?? '#7c3aed',
-    brand_color_secondary: props.settings.brand_color_secondary ?? '#c026d3',
+    brand_color_primary: props.settings.brand_color_primary ?? '#92400e',
+    brand_color_secondary: props.settings.brand_color_secondary ?? '#d97706',
     contact_email: props.settings.contact_email ?? '',
     contact_phone: props.settings.contact_phone ?? '',
     contact_address: props.settings.contact_address ?? '',
@@ -31,10 +31,10 @@ const form = useForm({
 const isHex = (value) => /^#[0-9a-fA-F]{6}$/.test(value || '');
 
 const primary = computed(() =>
-    isHex(form.brand_color_primary) ? form.brand_color_primary : '#7c3aed',
+    isHex(form.brand_color_primary) ? form.brand_color_primary : '#92400e',
 );
 const secondary = computed(() =>
-    isHex(form.brand_color_secondary) ? form.brand_color_secondary : '#c026d3',
+    isHex(form.brand_color_secondary) ? form.brand_color_secondary : '#d97706',
 );
 
 const previewName = computed(() => form.business_name?.trim() || 'Mi Negocio');
@@ -173,7 +173,7 @@ const submit = () => {
                                     type="text"
                                     class="block w-full"
                                     v-model="form.brand_color_primary"
-                                    placeholder="#7c3aed"
+                                    placeholder="#92400e"
                                 />
                             </div>
                             <InputError class="mt-2" :message="form.errors.brand_color_primary" />
@@ -193,7 +193,7 @@ const submit = () => {
                                     type="text"
                                     class="block w-full"
                                     v-model="form.brand_color_secondary"
-                                    placeholder="#c026d3"
+                                    placeholder="#d97706"
                                 />
                             </div>
                             <InputError class="mt-2" :message="form.errors.brand_color_secondary" />

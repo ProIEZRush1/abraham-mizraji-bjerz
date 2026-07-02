@@ -153,7 +153,7 @@ const extensionLabel = (file) =>
                             <div class="mt-4 flex items-center gap-2">
                                 <button
                                     type="button"
-                                    class="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-gradient-to-r from-[#7c3aed] to-[#c026d3] px-3 py-2 text-xs font-semibold text-white shadow-sm transition hover:opacity-90"
+                                    class="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-gradient-to-r from-[#92400e] to-[#d97706] px-3 py-2 text-xs font-semibold text-white shadow-sm transition hover:opacity-90"
                                     @click="copyUrl(file)"
                                 >
                                     <svg

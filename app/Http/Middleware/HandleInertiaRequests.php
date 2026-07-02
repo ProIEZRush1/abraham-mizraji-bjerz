@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Services\CarritoService;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -35,6 +36,13 @@ class HandleInertiaRequests extends Middleware
             'capabilities' => config('capabilities.nav', []),
             'auth' => [
                 'user' => $request->user(),
+                'isAdmin' => (bool) $request->user()?->hasRole('admin'),
+            ],
+            'trialLocked' => trial_locked(),
+            'carritoCount' => app(CarritoService::class)->contarItems($request),
+            'flash' => [
+                'success' => $request->session()->get('success'),
+                'error' => $request->session()->get('error'),
             ],
         ];
     }

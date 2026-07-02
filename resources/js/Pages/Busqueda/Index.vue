@@ -63,7 +63,7 @@ onBeforeUnmount(() => {
         <div class="mx-auto max-w-4xl space-y-8">
             <!-- Caja de búsqueda -->
             <section
-                class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#7c3aed] to-[#c026d3] p-7 text-white shadow-xl shadow-fuchsia-500/20 sm:p-9"
+                class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#92400e] to-[#d97706] p-7 text-white shadow-xl shadow-orange-500/20 sm:p-9"
             >
                 <div
                     class="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-white/10 blur-2xl"
@@ -100,7 +100,7 @@ onBeforeUnmount(() => {
                                 type="search"
                                 autofocus
                                 placeholder="Escribe para buscar…"
-                                class="w-full rounded-xl border-0 bg-white py-3.5 pl-12 pr-28 text-base text-slate-800 shadow-lg shadow-fuchsia-900/10 placeholder:text-slate-400 focus:ring-2 focus:ring-white/70"
+                                class="w-full rounded-xl border-0 bg-white py-3.5 pl-12 pr-28 text-base text-slate-800 shadow-lg shadow-orange-900/10 placeholder:text-slate-400 focus:ring-2 focus:ring-white/70"
                             />
                             <button
                                 type="submit"
@@ -137,7 +137,7 @@ onBeforeUnmount(() => {
                             {{ group.label }}
                         </h3>
                         <span
-                            class="rounded-full bg-fuchsia-50 px-2.5 py-0.5 text-xs font-semibold text-[#a21caf]"
+                            class="rounded-full bg-orange-50 px-2.5 py-0.5 text-xs font-semibold text-[#78350f]"
                         >
                             {{ group.count }}
                         </span>
@@ -152,7 +152,7 @@ onBeforeUnmount(() => {
                                 :class="item.url ? 'hover:bg-slate-50' : ''"
                             >
                                 <span
-                                    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#7c3aed] to-[#c026d3] text-white"
+                                    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#92400e] to-[#d97706] text-white"
                                 >
                                     {{ group.icon }}
                                 </span>

@@ -108,7 +108,7 @@ const hasPayments = computed(() => props.payments.length > 0);
             >
                 <!-- Resumen -->
                 <div
-                    class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#7c3aed] to-[#c026d3] p-8 text-white shadow-xl shadow-fuchsia-500/20 lg:col-span-2"
+                    class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#92400e] to-[#d97706] p-8 text-white shadow-xl shadow-orange-500/20 lg:col-span-2"
                 >
                     <div
                         class="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-white/10 blur-2xl"
@@ -190,7 +190,7 @@ const hasPayments = computed(() => props.payments.length > 0);
 
                         <div class="flex items-center gap-4">
                             <PrimaryButton
-                                class="!bg-gradient-to-r !from-[#7c3aed] !to-[#c026d3]"
+                                class="!bg-gradient-to-r !from-[#92400e] !to-[#d97706]"
                                 :class="{ 'opacity-50': form.processing }"
                                 :disabled="form.processing"
                             >
@@ -275,7 +275,7 @@ const hasPayments = computed(() => props.payments.length > 0);
                                             :href="payment.checkout_url"
                                             target="_blank"
                                             rel="noopener"
-                                            class="text-sm font-semibold text-[#7c3aed] hover:underline"
+                                            class="text-sm font-semibold text-[#92400e] hover:underline"
                                         >
                                             Abrir
                                         </a>
@@ -296,7 +296,7 @@ const hasPayments = computed(() => props.payments.length > 0);
 
                 <div v-else class="px-6 py-16 text-center">
                     <div
-                        class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#7c3aed] to-[#c026d3] text-2xl text-white shadow-lg shadow-fuchsia-500/20"
+                        class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#92400e] to-[#d97706] text-2xl text-white shadow-lg shadow-orange-500/20"
                     >
                         💳
                     </div>

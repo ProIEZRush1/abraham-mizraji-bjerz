@@ -125,7 +125,7 @@ const startOver = () => {
         <div class="mx-auto max-w-5xl space-y-8">
             <!-- Encabezado -->
             <section
-                class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#7c3aed] to-[#c026d3] p-8 text-white shadow-xl shadow-fuchsia-500/20"
+                class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#92400e] to-[#d97706] p-8 text-white shadow-xl shadow-orange-500/20"
             >
                 <div
                     class="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-white/10 blur-2xl"
@@ -222,7 +222,7 @@ const startOver = () => {
                         <select
                             id="target"
                             v-model="uploadForm.target"
-                            class="mt-1 block w-full rounded-xl border-slate-300 shadow-sm focus:border-[#7c3aed] focus:ring-[#7c3aed]"
+                            class="mt-1 block w-full rounded-xl border-slate-300 shadow-sm focus:border-[#92400e] focus:ring-[#92400e]"
                         >
                             <option v-for="t in targets" :key="t.key" :value="t.key">
                                 {{ t.label }}
@@ -238,7 +238,7 @@ const startOver = () => {
                             ref="fileInput"
                             type="file"
                             accept=".csv,text/csv"
-                            class="mt-1 block w-full rounded-xl border border-slate-300 text-sm text-slate-600 shadow-sm file:mr-4 file:rounded-lg file:border-0 file:bg-gradient-to-r file:from-violet-600 file:to-fuchsia-600 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:from-violet-500 hover:file:to-fuchsia-500"
+                            class="mt-1 block w-full rounded-xl border border-slate-300 text-sm text-slate-600 shadow-sm file:mr-4 file:rounded-lg file:border-0 file:bg-gradient-to-r file:from-amber-600 file:to-orange-600 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:from-amber-500 hover:file:to-orange-500"
                             @change="onFileChange"
                         />
                         <InputError class="mt-2" :message="uploadForm.errors.file" />
@@ -248,7 +248,7 @@ const startOver = () => {
                         <input
                             v-model="uploadForm.has_header"
                             type="checkbox"
-                            class="rounded border-slate-300 text-[#7c3aed] focus:ring-[#7c3aed]"
+                            class="rounded border-slate-300 text-[#92400e] focus:ring-[#92400e]"
                         />
                         La primera fila contiene los nombres de las columnas
                     </label>
@@ -298,7 +298,7 @@ const startOver = () => {
                         </div>
                         <select
                             v-model="mapping[field.name]"
-                            class="block w-full rounded-xl border-slate-300 shadow-sm focus:border-[#7c3aed] focus:ring-[#7c3aed]"
+                            class="block w-full rounded-xl border-slate-300 shadow-sm focus:border-[#92400e] focus:ring-[#92400e]"
                         >
                             <option value="">— Sin asignar —</option>
                             <option

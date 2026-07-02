@@ -17,7 +17,7 @@ const tipoEstilo = (tipo) => {
         case 'error':
             return { punto: 'bg-rose-500', chip: 'bg-rose-50 text-rose-700', etiqueta: 'Error' };
         default:
-            return { punto: 'bg-[#7c3aed]', chip: 'bg-fuchsia-50 text-[#7c3aed]', etiqueta: 'Info' };
+            return { punto: 'bg-[#92400e]', chip: 'bg-orange-50 text-[#92400e]', etiqueta: 'Info' };
     }
 };
 
@@ -52,7 +52,7 @@ const eliminar = (id) => {
             >
                 <div class="flex items-center gap-4">
                     <span
-                        class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#7c3aed] to-[#c026d3] text-white shadow-md"
+                        class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#92400e] to-[#d97706] text-white shadow-md"
                     >
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                             <path
@@ -66,7 +66,7 @@ const eliminar = (id) => {
                         <p class="text-sm font-semibold text-slate-800">Tus notificaciones</p>
                         <p class="text-xs text-slate-500">
                             <span v-if="noLeidas > 0">
-                                Tienes <span class="font-semibold text-[#7c3aed]">{{ noLeidas }}</span>
+                                Tienes <span class="font-semibold text-[#92400e]">{{ noLeidas }}</span>
                                 sin leer
                             </span>
                             <span v-else>Estás al día</span>
@@ -77,7 +77,7 @@ const eliminar = (id) => {
                     v-if="noLeidas > 0"
                     type="button"
                     @click="marcarTodas"
-                    class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#7c3aed] to-[#c026d3] px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-fuchsia-500/20 transition hover:opacity-90"
+                    class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#92400e] to-[#d97706] px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-orange-500/20 transition hover:opacity-90"
                 >
                     Marcar todas como leídas
                 </button>
@@ -100,7 +100,7 @@ const eliminar = (id) => {
                     :key="item.id"
                     :class="[
                         'rounded-2xl border bg-white p-5 shadow-sm transition',
-                        item.leida ? 'border-slate-200' : 'border-fuchsia-200 ring-1 ring-fuchsia-100',
+                        item.leida ? 'border-slate-200' : 'border-orange-200 ring-1 ring-orange-100',
                     ]"
                 >
                     <div class="flex items-start gap-4">
@@ -120,7 +120,7 @@ const eliminar = (id) => {
                                 </span>
                                 <span
                                     v-if="!item.leida"
-                                    class="rounded-full bg-[#7c3aed] px-2 py-0.5 text-[11px] font-semibold text-white"
+                                    class="rounded-full bg-[#92400e] px-2 py-0.5 text-[11px] font-semibold text-white"
                                 >
                                     Nuevo
                                 </span>
@@ -134,7 +134,7 @@ const eliminar = (id) => {
                                 <a
                                     v-if="item.enlace"
                                     :href="item.enlace"
-                                    class="text-xs font-semibold text-[#7c3aed] transition hover:text-[#c026d3]"
+                                    class="text-xs font-semibold text-[#92400e] transition hover:text-[#d97706]"
                                 >
                                     Ver detalle
                                 </a>
@@ -172,7 +172,7 @@ const eliminar = (id) => {
                         :class="[
                             'min-w-[2.25rem] rounded-lg px-3 py-2 text-center text-sm font-semibold transition',
                             link.active
-                                ? 'bg-gradient-to-r from-[#7c3aed] to-[#c026d3] text-white shadow'
+                                ? 'bg-gradient-to-r from-[#92400e] to-[#d97706] text-white shadow'
                                 : 'text-slate-600 hover:bg-slate-100',
                         ]"
                         v-html="link.label"

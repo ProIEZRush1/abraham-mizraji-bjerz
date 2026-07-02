@@ -26,11 +26,11 @@ class AjustesSettingService
         return [
             'business_name' => config('app.name'),
             'logo_url' => null,
-            'brand_color_primary' => '#7c3aed',
-            'brand_color_secondary' => '#c026d3',
-            'contact_email' => null,
-            'contact_phone' => null,
-            'contact_address' => null,
+            'brand_color_primary' => '#92400e',
+            'brand_color_secondary' => '#d97706',
+            'contact_email' => 'contacto@abrahammizraji.com',
+            'contact_phone' => '+54 11 5555-5555',
+            'contact_address' => 'Buenos Aires, Argentina',
         ];
     }
 

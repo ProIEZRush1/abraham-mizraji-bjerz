@@ -99,7 +99,7 @@ const waLink = `https://wa.me/${s.built_by_whatsapp}`
 
 <style scoped>
 *{box-sizing:border-box}
-.page{font-family:'Poppins',system-ui,Avenir,Helvetica,Arial,sans-serif;color:#171327;line-height:1.55;--primary:#7c3aed;--accent:#db2777}
+.page{font-family:'Poppins',system-ui,Avenir,Helvetica,Arial,sans-serif;color:#171327;line-height:1.55;--primary:#92400e;--accent:#f59e0b}
 .wrap{width:min(1140px,92%);margin:0 auto}
 h1,h2{font-family:Georgia,'Times New Roman',serif;line-height:1.1;margin:0}
 a{text-decoration:none;color:inherit}
@@ -121,7 +121,7 @@ a{text-decoration:none;color:inherit}
 .hero h1{font-size:56px;margin:12px 0 16px}
 .lead{color:#6b7280;font-size:18px;max-width:440px;margin-bottom:24px}
 .stats{display:flex;gap:32px;margin-top:34px}.stats strong{display:block;font-size:23px;font-family:Georgia,serif}.stats span{color:#6b7280;font-size:13px}
-.hero__photo{height:430px;border-radius:24px;background-size:cover;background-position:center;box-shadow:0 30px 60px rgba(124,58,237,.25)}
+.hero__photo{height:430px;border-radius:24px;background-size:cover;background-position:center;box-shadow:0 30px 60px rgba(146,64,14,.25)}
 .strip{background:#171327;color:#fff}.strip__inner{display:flex;flex-wrap:wrap;gap:22px;justify-content:space-between;padding:15px 0;font-size:14px;font-weight:500}
 .section{padding:70px 0}.section.alt{background:#f6f4fb}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}

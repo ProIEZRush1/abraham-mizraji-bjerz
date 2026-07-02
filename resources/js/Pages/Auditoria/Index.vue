@@ -109,7 +109,7 @@ const changeRows = (changes) => {
         <div class="mx-auto max-w-7xl space-y-6">
             <!-- Encabezado -->
             <section
-                class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#7c3aed] to-[#c026d3] p-7 text-white shadow-xl shadow-fuchsia-500/20"
+                class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#92400e] to-[#d97706] p-7 text-white shadow-xl shadow-orange-500/20"
             >
                 <div
                     class="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-white/10 blur-2xl"
@@ -139,7 +139,7 @@ const changeRows = (changes) => {
                             v-model="form.search"
                             type="text"
                             placeholder="Usuario, modelo o ID…"
-                            class="w-full rounded-xl border-slate-200 text-sm shadow-sm focus:border-[#7c3aed] focus:ring-[#7c3aed]"
+                            class="w-full rounded-xl border-slate-200 text-sm shadow-sm focus:border-[#92400e] focus:ring-[#92400e]"
                         />
                     </div>
 
@@ -149,7 +149,7 @@ const changeRows = (changes) => {
                         </label>
                         <select
                             v-model="form.event"
-                            class="w-full rounded-xl border-slate-200 text-sm shadow-sm focus:border-[#7c3aed] focus:ring-[#7c3aed]"
+                            class="w-full rounded-xl border-slate-200 text-sm shadow-sm focus:border-[#92400e] focus:ring-[#92400e]"
                         >
                             <option value="">Todas</option>
                             <option
@@ -168,7 +168,7 @@ const changeRows = (changes) => {
                         </label>
                         <select
                             v-model="form.auditable_type"
-                            class="w-full rounded-xl border-slate-200 text-sm shadow-sm focus:border-[#7c3aed] focus:ring-[#7c3aed]"
+                            class="w-full rounded-xl border-slate-200 text-sm shadow-sm focus:border-[#92400e] focus:ring-[#92400e]"
                         >
                             <option value="">Todos</option>
                             <option
@@ -187,7 +187,7 @@ const changeRows = (changes) => {
                         </label>
                         <select
                             v-model="form.user_id"
-                            class="w-full rounded-xl border-slate-200 text-sm shadow-sm focus:border-[#7c3aed] focus:ring-[#7c3aed]"
+                            class="w-full rounded-xl border-slate-200 text-sm shadow-sm focus:border-[#92400e] focus:ring-[#92400e]"
                         >
                             <option value="">Todos</option>
                             <option
@@ -208,7 +208,7 @@ const changeRows = (changes) => {
                             <input
                                 v-model="form.from"
                                 type="date"
-                                class="w-full rounded-xl border-slate-200 text-sm shadow-sm focus:border-[#7c3aed] focus:ring-[#7c3aed]"
+                                class="w-full rounded-xl border-slate-200 text-sm shadow-sm focus:border-[#92400e] focus:ring-[#92400e]"
                             />
                         </div>
                         <div>
@@ -218,7 +218,7 @@ const changeRows = (changes) => {
                             <input
                                 v-model="form.to"
                                 type="date"
-                                class="w-full rounded-xl border-slate-200 text-sm shadow-sm focus:border-[#7c3aed] focus:ring-[#7c3aed]"
+                                class="w-full rounded-xl border-slate-200 text-sm shadow-sm focus:border-[#92400e] focus:ring-[#92400e]"
                             />
                         </div>
                     </div>
@@ -282,7 +282,7 @@ const changeRows = (changes) => {
                                     <button
                                         type="button"
                                         @click="openDetail(log)"
-                                        class="rounded-lg px-3 py-1.5 text-xs font-semibold text-[#7c3aed] transition hover:bg-fuchsia-50"
+                                        class="rounded-lg px-3 py-1.5 text-xs font-semibold text-[#92400e] transition hover:bg-orange-50"
                                     >
                                         Ver cambios
                                     </button>
@@ -322,7 +322,7 @@ const changeRows = (changes) => {
                                 :class="[
                                     'min-w-9 rounded-lg px-3 py-1.5 text-center text-xs font-semibold transition',
                                     link.active
-                                        ? 'bg-gradient-to-r from-[#7c3aed] to-[#c026d3] text-white shadow-sm'
+                                        ? 'bg-gradient-to-r from-[#92400e] to-[#d97706] text-white shadow-sm'
                                         : 'text-slate-600 hover:bg-slate-100',
                                 ]"
                                 v-html="link.label"
@@ -391,7 +391,7 @@ const changeRows = (changes) => {
                     <button
                         type="button"
                         @click="closeDetail"
-                        class="rounded-xl bg-gradient-to-r from-[#7c3aed] to-[#c026d3] px-5 py-2 text-sm font-semibold text-white shadow-md shadow-fuchsia-500/20 transition hover:opacity-95"
+                        class="rounded-xl bg-gradient-to-r from-[#92400e] to-[#d97706] px-5 py-2 text-sm font-semibold text-white shadow-md shadow-orange-500/20 transition hover:opacity-95"
                     >
                         Cerrar
                     </button>

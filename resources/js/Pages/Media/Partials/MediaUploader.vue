@@ -76,8 +76,8 @@ const onDrop = (event) => {
             :class="[
                 'flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed px-6 py-10 text-center transition',
                 isDragging
-                    ? 'border-fuchsia-400 bg-fuchsia-50'
-                    : 'border-slate-300 bg-white hover:border-fuchsia-300 hover:bg-slate-50',
+                    ? 'border-orange-400 bg-orange-50'
+                    : 'border-slate-300 bg-white hover:border-orange-300 hover:bg-slate-50',
             ]"
             @click="openPicker"
             @keydown.enter.prevent="openPicker"
@@ -87,7 +87,7 @@ const onDrop = (event) => {
             @drop.prevent="onDrop"
         >
             <span
-                class="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#7c3aed] to-[#c026d3] text-white shadow-md"
+                class="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#92400e] to-[#d97706] text-white shadow-md"
             >
                 <svg
                     class="h-7 w-7"
@@ -106,7 +106,7 @@ const onDrop = (event) => {
 
             <p class="mt-4 text-sm font-semibold text-slate-700">
                 Arrastra un archivo aquí o
-                <span class="text-fuchsia-600">haz clic para seleccionar</span>
+                <span class="text-orange-600">haz clic para seleccionar</span>
             </p>
             <p class="mt-1 text-xs text-slate-400">
                 Imágenes, documentos, audio o video — hasta 25 MB
@@ -124,7 +124,7 @@ const onDrop = (event) => {
         <div v-if="uploading" class="mt-4">
             <div class="h-2 w-full overflow-hidden rounded-full bg-slate-200">
                 <div
-                    class="h-full rounded-full bg-gradient-to-r from-[#7c3aed] to-[#c026d3] transition-all"
+                    class="h-full rounded-full bg-gradient-to-r from-[#92400e] to-[#d97706] transition-all"
                     :style="{ width: progress + '%' }"
                 ></div>
             </div>

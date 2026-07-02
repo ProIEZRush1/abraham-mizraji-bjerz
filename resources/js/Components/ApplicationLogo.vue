@@ -18,15 +18,20 @@ const props = defineProps({
 });
 
 const page = usePage();
-const name = computed(() => page.props.name || 'Overcloud');
-const initial = computed(() => name.value.trim().charAt(0).toUpperCase() || 'O');
+const name = computed(() => page.props.name || 'Abraham Mizraji');
+const initials = computed(() => {
+    const parts = name.value.trim().split(/\s+/).filter(Boolean);
+    if (!parts.length) return 'AM';
+    if (parts.length === 1) return parts[0].substring(0, 2).toUpperCase();
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+});
 </script>
 
 <template>
     <div class="flex items-center gap-3">
         <span
             :class="markSize"
-            class="relative inline-flex shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#7c3aed] to-[#c026d3] shadow-lg shadow-fuchsia-500/30"
+            class="relative inline-flex shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#92400e] to-[#d97706] shadow-lg shadow-orange-500/30"
         >
             <svg
                 viewBox="0 0 40 40"
@@ -34,15 +39,32 @@ const initial = computed(() => name.value.trim().charAt(0).toUpperCase() || 'O')
                 fill="none"
                 aria-hidden="true"
             >
-                <circle cx="15" cy="20" r="9" fill="currentColor" fill-opacity="0.55" />
-                <circle cx="25" cy="20" r="9" fill="currentColor" fill-opacity="0.9" />
+                <rect
+                    x="9"
+                    y="9"
+                    width="22"
+                    height="22"
+                    rx="6"
+                    transform="rotate(45 20 20)"
+                    fill="currentColor"
+                    fill-opacity="0.9"
+                />
+                <text
+                    x="20"
+                    y="25"
+                    text-anchor="middle"
+                    font-size="13"
+                    font-weight="700"
+                    fill="#92400e"
+                    font-family="sans-serif"
+                >{{ initials }}</text>
             </svg>
         </span>
 
         <span
             v-if="showText"
             :class="textSize"
-            class="bg-gradient-to-r from-[#7c3aed] to-[#c026d3] bg-clip-text font-extrabold tracking-tight text-transparent"
+            class="bg-gradient-to-r from-[#92400e] to-[#d97706] bg-clip-text font-extrabold tracking-tight text-transparent"
         >
             {{ name }}
         </span>

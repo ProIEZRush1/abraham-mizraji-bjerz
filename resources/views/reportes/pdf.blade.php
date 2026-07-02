@@ -13,8 +13,8 @@
             padding: 28px 32px;
         }
         .header {
-            background: #7c3aed;
-            background: linear-gradient(90deg, #7c3aed, #c026d3);
+            background: #92400e;
+            background: linear-gradient(90deg, #92400e, #d97706);
             color: #ffffff;
             padding: 18px 22px;
             border-radius: 10px;
@@ -29,7 +29,7 @@
             padding: 12px;
             vertical-align: top;
         }
-        .cards .valor { font-size: 16px; font-weight: bold; color: #7c3aed; }
+        .cards .valor { font-size: 16px; font-weight: bold; color: #92400e; }
         .cards .label { font-size: 10px; color: #475569; margin-top: 4px; }
         .cards .hint { font-size: 9px; color: #94a3b8; margin-top: 2px; }
         h2 { font-size: 14px; color: #1e293b; margin: 24px 0 8px; }
@@ -53,7 +53,7 @@
 </head>
 <body>
     <div class="header">
-        <h1>Reporte de métricas</h1>
+        <h1>Reporte de ventas</h1>
         <p>Generado el {{ $generadoEl }}</p>
     </div>
 
@@ -69,13 +69,13 @@
         </tr>
     </table>
 
-    <h2>Desglose por categoría</h2>
+    <h2>Ingresos por categoría</h2>
     @if (count($categorias) > 0)
         <table class="data">
             <thead>
                 <tr>
                     <th>Categoría</th>
-                    <th class="num">Registros</th>
+                    <th class="num">Artículos</th>
                     <th class="num">Total</th>
                 </tr>
             </thead>
@@ -90,10 +90,34 @@
             </tbody>
         </table>
     @else
-        <p class="empty">Aún no hay categorías registradas.</p>
+        <p class="empty">Aún no hay ventas por categoría.</p>
     @endif
 
-    <h2>Detalle de métricas</h2>
+    <h2>Productos más vendidos</h2>
+    @if (count($productosMasVendidos) > 0)
+        <table class="data">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th class="num">Unidades</th>
+                    <th class="num">Ingresos</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($productosMasVendidos as $fila)
+                    <tr>
+                        <td>{{ $fila['nombre'] }}</td>
+                        <td class="num">{{ number_format($fila['unidades'], 0, '.', ',') }}</td>
+                        <td class="num">${{ number_format($fila['ingresos'], 2, '.', ',') }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @else
+        <p class="empty">Aún no hay productos vendidos.</p>
+    @endif
+
+    <h2>Detalle de pedidos</h2>
     @if (count($registros) > 0)
         <table class="data">
             <thead>

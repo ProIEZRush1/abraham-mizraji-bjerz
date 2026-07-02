@@ -104,7 +104,7 @@ const formatDate = (iso) => {
         <div class="mx-auto max-w-5xl space-y-8">
             <!-- Intro -->
             <section
-                class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#7c3aed] to-[#c026d3] p-8 text-white shadow-xl shadow-fuchsia-500/20"
+                class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#92400e] to-[#d97706] p-8 text-white shadow-xl shadow-orange-500/20"
             >
                 <div
                     class="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-white/10 blur-2xl"
@@ -235,7 +235,7 @@ const formatDate = (iso) => {
                                 <span
                                     v-for="ability in token.abilities"
                                     :key="ability"
-                                    class="rounded-full bg-violet-50 px-2 py-0.5 text-xs font-medium text-violet-700"
+                                    class="rounded-full bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-700"
                                 >
                                     {{ ability }}
                                 </span>

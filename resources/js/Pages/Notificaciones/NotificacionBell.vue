@@ -17,7 +17,7 @@ const tipoColor = (tipo) => {
         case 'error':
             return 'bg-rose-500';
         default:
-            return 'bg-[#7c3aed]';
+            return 'bg-[#92400e]';
     }
 };
 
@@ -88,7 +88,7 @@ onBeforeUnmount(() => {
             </svg>
             <span
                 v-if="noLeidas > 0"
-                class="absolute -right-0.5 -top-0.5 flex h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-gradient-to-br from-[#7c3aed] to-[#c026d3] px-1 text-[10px] font-bold text-white shadow"
+                class="absolute -right-0.5 -top-0.5 flex h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-gradient-to-br from-[#92400e] to-[#d97706] px-1 text-[10px] font-bold text-white shadow"
             >
                 {{ badge }}
             </span>
@@ -115,7 +115,7 @@ onBeforeUnmount(() => {
                         v-if="noLeidas > 0"
                         type="button"
                         @click="leerTodas"
-                        class="text-xs font-semibold text-[#7c3aed] transition hover:text-[#c026d3]"
+                        class="text-xs font-semibold text-[#92400e] transition hover:text-[#d97706]"
                     >
                         Marcar todas
                     </button>
@@ -135,7 +135,7 @@ onBeforeUnmount(() => {
                             :key="item.id"
                             :class="[
                                 'flex gap-3 px-4 py-3 transition hover:bg-slate-50',
-                                item.leida ? 'opacity-70' : 'bg-fuchsia-50/40',
+                                item.leida ? 'opacity-70' : 'bg-orange-50/40',
                             ]"
                         >
                             <span
@@ -157,7 +157,7 @@ onBeforeUnmount(() => {
                 <div class="border-t border-slate-100 px-4 py-3">
                     <Link
                         :href="route('notificaciones.index')"
-                        class="block text-center text-sm font-semibold text-[#7c3aed] transition hover:text-[#c026d3]"
+                        class="block text-center text-sm font-semibold text-[#92400e] transition hover:text-[#d97706]"
                         @click="cerrar"
                     >
                         Ver todas

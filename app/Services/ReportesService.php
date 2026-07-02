@@ -2,27 +2,27 @@
 
 namespace App\Services;
 
-use App\Models\ReporteMetrica;
+use App\Models\Pedido;
+use App\Models\PedidoItem;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Agrega métricas genéricas del negocio para la sección de Reportes.
+ * Reporte de ventas real, calculado a partir de los pedidos del negocio.
  *
- * El servicio es autocontenido: lee únicamente la tabla `reportes_metricas`
- * propia de esta capacidad y degrada con elegancia (devuelve ceros / series
- * vacías) cuando la migración aún no se ha ejecutado, de modo que el panel
- * nunca arroje un error 500.
+ * Se consideran "vendidos" los pedidos en un estado que implica que el pago
+ * se concretó (pagado, en_preparacion, enviado, entregado); los pendientes y
+ * cancelados no suman a los ingresos. Degrada con elegancia si las tablas
+ * aún no existen, para que el panel nunca arroje un error 500.
  */
 class ReportesService
 {
-    /**
-     * Indica si el almacén de métricas está disponible.
-     */
+    private const ESTADOS_VENDIDOS = ['pagado', 'en_preparacion', 'enviado', 'entregado'];
+
     public function disponible(): bool
     {
-        return Schema::hasTable('reportes_metricas');
+        return Schema::hasTable('pedidos');
     }
 
     /**
@@ -32,48 +32,52 @@ class ReportesService
      */
     public function resumen(): array
     {
-        $total = 0;
-        $suma = 0.0;
-        $categorias = 0;
+        $pedidosVendidos = 0;
+        $ingresos = 0.0;
+        $productosVendidos = 0;
 
         if ($this->disponible()) {
-            $total = ReporteMetrica::query()->count();
-            $suma = (float) ReporteMetrica::query()->sum('valor');
-            $categorias = ReporteMetrica::query()->distinct('categoria')->count('categoria');
+            $vendidos = Pedido::whereIn('estado', self::ESTADOS_VENDIDOS);
+            $pedidosVendidos = (clone $vendidos)->count();
+            $ingresos = (float) (clone $vendidos)->sum('total');
+            $productosVendidos = (int) PedidoItem::whereHas(
+                'pedido',
+                fn ($q) => $q->whereIn('estado', self::ESTADOS_VENDIDOS)
+            )->sum('cantidad');
         }
 
-        $promedio = $total > 0 ? $suma / $total : 0.0;
+        $ticketPromedio = $pedidosVendidos > 0 ? $ingresos / $pedidosVendidos : 0.0;
 
         return [
             [
-                'label' => 'Registros totales',
-                'valor' => number_format($total, 0, '.', ','),
-                'hint' => 'Métricas capturadas',
-                'gradient' => 'from-[#7c3aed] to-[#a855f7]',
+                'label' => 'Ingresos totales',
+                'valor' => '$'.number_format($ingresos, 2, '.', ','),
+                'hint' => 'Pedidos pagados o en curso',
+                'gradient' => 'from-[#92400e] to-[#b45309]',
             ],
             [
-                'label' => 'Valor acumulado',
-                'valor' => '$'.number_format($suma, 2, '.', ','),
-                'hint' => 'Suma de todas las métricas',
-                'gradient' => 'from-[#a21caf] to-[#c026d3]',
+                'label' => 'Pedidos vendidos',
+                'valor' => number_format($pedidosVendidos, 0, '.', ','),
+                'hint' => 'No incluye pendientes ni cancelados',
+                'gradient' => 'from-[#78350f] to-[#d97706]',
             ],
             [
-                'label' => 'Categorías',
-                'valor' => number_format($categorias, 0, '.', ','),
-                'hint' => 'Áreas medidas',
-                'gradient' => 'from-[#7c3aed] to-[#c026d3]',
+                'label' => 'Ticket promedio',
+                'valor' => '$'.number_format($ticketPromedio, 2, '.', ','),
+                'hint' => 'Valor promedio por pedido',
+                'gradient' => 'from-[#92400e] to-[#d97706]',
             ],
             [
-                'label' => 'Promedio por registro',
-                'valor' => '$'.number_format($promedio, 2, '.', ','),
-                'hint' => 'Valor medio',
-                'gradient' => 'from-[#c026d3] to-[#db2777]',
+                'label' => 'Productos vendidos',
+                'valor' => number_format($productosVendidos, 0, '.', ','),
+                'hint' => 'Unidades totales despachadas',
+                'gradient' => 'from-[#d97706] to-[#f59e0b]',
             ],
         ];
     }
 
     /**
-     * Serie diaria de valores para los últimos N días (gráfica de barras).
+     * Serie diaria de ingresos para los últimos N días (gráfica de barras).
      *
      * @return array<int, array<string, mixed>>
      */
@@ -86,11 +90,12 @@ class ReportesService
         $porFecha = collect();
 
         if ($this->disponible()) {
-            $porFecha = ReporteMetrica::query()
-                ->where('ocurrido_el', '>=', $inicio->toDateString())
-                ->selectRaw('ocurrido_el, SUM(valor) as total')
-                ->groupBy('ocurrido_el')
-                ->pluck('total', 'ocurrido_el');
+            $porFecha = Pedido::query()
+                ->whereIn('estado', self::ESTADOS_VENDIDOS)
+                ->whereDate('created_at', '>=', $inicio->toDateString())
+                ->selectRaw('DATE(created_at) as fecha, SUM(total) as total')
+                ->groupBy('fecha')
+                ->pluck('total', 'fecha');
         }
 
         $serie = [];
@@ -108,7 +113,7 @@ class ReportesService
     }
 
     /**
-     * Totales agrupados por categoría (desglose).
+     * Ingresos agrupados por categoría de producto.
      *
      * @return array<int, array<string, mixed>>
      */
@@ -118,9 +123,12 @@ class ReportesService
             return [];
         }
 
-        return ReporteMetrica::query()
-            ->selectRaw('categoria, COUNT(*) as registros, SUM(valor) as total')
-            ->groupBy('categoria')
+        return PedidoItem::query()
+            ->whereHas('pedido', fn ($q) => $q->whereIn('estado', self::ESTADOS_VENDIDOS))
+            ->join('productos', 'productos.id', '=', 'pedido_items.producto_id')
+            ->join('categorias', 'categorias.id', '=', 'productos.categoria_id')
+            ->selectRaw('categorias.nombre as categoria, COUNT(*) as registros, SUM(pedido_items.subtotal) as total')
+            ->groupBy('categorias.nombre')
             ->orderByDesc('total')
             ->get()
             ->map(fn ($fila) => [
@@ -132,9 +140,35 @@ class ReportesService
     }
 
     /**
-     * Registros individuales usados por las exportaciones (CSV / PDF).
+     * Los productos más vendidos por unidades, entre los pedidos vendidos.
      *
-     * @return Collection<int, ReporteMetrica>
+     * @return array<int, array<string, mixed>>
+     */
+    public function productosMasVendidos(int $limite = 5): array
+    {
+        if (! $this->disponible()) {
+            return [];
+        }
+
+        return PedidoItem::query()
+            ->whereHas('pedido', fn ($q) => $q->whereIn('estado', self::ESTADOS_VENDIDOS))
+            ->selectRaw('nombre_producto, SUM(cantidad) as unidades, SUM(subtotal) as ingresos')
+            ->groupBy('nombre_producto')
+            ->orderByDesc('unidades')
+            ->take($limite)
+            ->get()
+            ->map(fn ($fila) => [
+                'nombre' => $fila->nombre_producto,
+                'unidades' => (int) $fila->unidades,
+                'ingresos' => round((float) $fila->ingresos, 2),
+            ])
+            ->all();
+    }
+
+    /**
+     * Un renglón por pedido vendido, usado por las exportaciones (CSV / PDF).
+     *
+     * @return Collection<int, object>
      */
     public function registros(): Collection
     {
@@ -142,9 +176,15 @@ class ReportesService
             return collect();
         }
 
-        return ReporteMetrica::query()
-            ->orderByDesc('ocurrido_el')
-            ->orderByDesc('id')
-            ->get();
+        return Pedido::whereIn('estado', self::ESTADOS_VENDIDOS)
+            ->orderByDesc('created_at')
+            ->get()
+            ->map(fn (Pedido $pedido) => (object) [
+                'id' => $pedido->id,
+                'categoria' => 'Pedido',
+                'etiqueta' => $pedido->numero_pedido,
+                'valor' => (float) $pedido->total,
+                'ocurrido_el' => $pedido->created_at,
+            ]);
     }
 }

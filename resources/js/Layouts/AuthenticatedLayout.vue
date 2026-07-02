@@ -23,6 +23,7 @@ const brandInitials = computed(() => {
 
 const userName = computed(() => page.props.auth?.user?.name ?? '');
 const userEmail = computed(() => page.props.auth?.user?.email ?? '');
+const trialLocked = computed(() => page.props.trialLocked === true);
 
 // Entradas de menú aportadas por las capacidades instaladas.
 // Cada entrada: { label, href, icon }. Se comparten vía Inertia (prop 'capabilities').
@@ -62,12 +63,12 @@ const userInitials = computed(() => {
                     class="flex items-center gap-3"
                 >
                     <span
-                        class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#7c3aed] to-[#c026d3] text-sm font-bold text-white shadow-lg shadow-fuchsia-500/20"
+                        class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#92400e] to-[#d97706] text-sm font-bold text-white shadow-lg shadow-orange-500/20"
                     >
                         {{ brandInitials }}
                     </span>
                     <span
-                        class="bg-gradient-to-r from-[#7c3aed] to-[#c026d3] bg-clip-text text-lg font-extrabold leading-tight tracking-tight text-transparent"
+                        class="bg-gradient-to-r from-[#92400e] to-[#d97706] bg-clip-text text-lg font-extrabold leading-tight tracking-tight text-transparent"
                     >
                         {{ businessName }}
                     </span>
@@ -81,7 +82,7 @@ const userInitials = computed(() => {
                     :class="[
                         'flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition',
                         route().current('dashboard')
-                            ? 'bg-gradient-to-r from-[#7c3aed] to-[#c026d3] text-white shadow-md shadow-fuchsia-500/20'
+                            ? 'bg-gradient-to-r from-[#92400e] to-[#d97706] text-white shadow-md shadow-orange-500/20'
                             : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900',
                     ]"
                 >
@@ -109,7 +110,7 @@ const userInitials = computed(() => {
                     :class="[
                         'flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition',
                         isCapabilityActive(item.href)
-                            ? 'bg-gradient-to-r from-[#7c3aed] to-[#c026d3] text-white shadow-md shadow-fuchsia-500/20'
+                            ? 'bg-gradient-to-r from-[#92400e] to-[#d97706] text-white shadow-md shadow-orange-500/20'
                             : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900',
                     ]"
                 >
@@ -131,6 +132,14 @@ const userInitials = computed(() => {
 
         <!-- Main column -->
         <div class="lg:pl-64">
+            <!-- Banner de modo prueba -->
+            <div
+                v-if="trialLocked"
+                class="flex items-center justify-center gap-2 bg-gradient-to-r from-[#92400e] to-[#d97706] px-4 py-2 text-center text-xs font-semibold text-white sm:text-sm"
+            >
+                🔒 Versión de prueba — activa todo con tu anticipo.
+            </div>
+
             <!-- Top bar -->
             <header
                 class="sticky top-0 z-30 flex h-16 items-center gap-4 border-b border-slate-200 bg-white/80 px-4 backdrop-blur sm:px-6 lg:px-8"
@@ -160,12 +169,12 @@ const userInitials = computed(() => {
                     </button>
                     <Link :href="route('dashboard')" class="flex items-center gap-2">
                         <span
-                            class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-[#7c3aed] to-[#c026d3] text-xs font-bold text-white"
+                            class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-[#92400e] to-[#d97706] text-xs font-bold text-white"
                         >
                             {{ brandInitials }}
                         </span>
                         <span
-                            class="bg-gradient-to-r from-[#7c3aed] to-[#c026d3] bg-clip-text text-base font-extrabold text-transparent"
+                            class="bg-gradient-to-r from-[#92400e] to-[#d97706] bg-clip-text text-base font-extrabold text-transparent"
                         >
                             {{ businessName }}
                         </span>
@@ -186,7 +195,7 @@ const userInitials = computed(() => {
                                 class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white py-1 pl-1 pr-3 text-sm font-medium text-slate-600 transition hover:border-slate-300 hover:text-slate-900 focus:outline-none"
                             >
                                 <span
-                                    class="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#7c3aed] to-[#c026d3] text-xs font-bold text-white"
+                                    class="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#92400e] to-[#d97706] text-xs font-bold text-white"
                                 >
                                     {{ userInitials }}
                                 </span>
@@ -211,6 +220,9 @@ const userInitials = computed(() => {
                                 <p class="text-sm font-semibold text-slate-800">{{ userName }}</p>
                                 <p class="truncate text-xs text-slate-500">{{ userEmail }}</p>
                             </div>
+                            <DropdownLink href="/">
+                                Ver tienda
+                            </DropdownLink>
                             <DropdownLink :href="route('profile.edit')">
                                 Mi perfil
                             </DropdownLink>

@@ -11,7 +11,7 @@
             <td align="center">
                 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;background-color:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 1px 3px rgba(15,23,42,0.08);">
                     <tr>
-                        <td style="background:linear-gradient(135deg,#7c3aed,#c026d3);padding:28px 32px;">
+                        <td style="background:linear-gradient(135deg,#92400e,#d97706);padding:28px 32px;">
                             <p style="margin:0;color:rgba(255,255,255,0.85);font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;">
                                 {{ config('app.name') }}
                             </p>
@@ -28,7 +28,7 @@
                             @if ($enlace)
                                 <table role="presentation" cellpadding="0" cellspacing="0" style="margin-top:28px;">
                                     <tr>
-                                        <td style="border-radius:12px;background:linear-gradient(135deg,#7c3aed,#c026d3);">
+                                        <td style="border-radius:12px;background:linear-gradient(135deg,#92400e,#d97706);">
                                             <a href="{{ $enlace }}" style="display:inline-block;padding:12px 24px;color:#ffffff;font-size:14px;font-weight:700;text-decoration:none;border-radius:12px;">
                                                 Ver detalle
                                             </a>

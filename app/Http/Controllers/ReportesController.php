@@ -22,6 +22,7 @@ class ReportesController extends Controller
             'resumen' => $this->reportes->resumen(),
             'serie' => $this->reportes->serieDiaria(),
             'categorias' => $this->reportes->porCategoria(),
+            'productosMasVendidos' => $this->reportes->productosMasVendidos(),
             'generadoEl' => CarbonImmutable::now()->translatedFormat('d M Y, H:i'),
         ]);
     }
@@ -70,6 +71,7 @@ class ReportesController extends Controller
         $datos = [
             'resumen' => $this->reportes->resumen(),
             'categorias' => $this->reportes->porCategoria(),
+            'productosMasVendidos' => $this->reportes->productosMasVendidos(),
             'registros' => $this->reportes->registros(),
             'generadoEl' => CarbonImmutable::now()->translatedFormat('d M Y, H:i'),
         ];

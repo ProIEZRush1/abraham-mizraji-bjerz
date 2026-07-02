@@ -6,14 +6,25 @@ return [
     | Navegación de capacidades
     |--------------------------------------------------------------------------
     |
-    | Cada capacidad instalada agrega aquí sus entradas de menú durante la
-    | integración. Una entrada tiene la forma:
-    |
-    |   ['label' => 'Reservas', 'href' => '/reservas', 'icon' => '📅']
-    |
-    | Estas entradas se comparten con Inertia mediante HandleInertiaRequests
-    | (prop 'capabilities') y el layout las renderiza en la barra lateral.
+    | Se comparte con Inertia mediante HandleInertiaRequests (prop
+    | 'capabilities') y AuthenticatedLayout la renderiza en la barra lateral
+    | del panel de administración. Cada entrada: ['label', 'href', 'icon'].
     |
     */
-    'nav' => [],
+    'nav' => [
+        ['label' => 'Productos', 'href' => '/productos', 'icon' => '🛍️'],
+        ['label' => 'Categorías', 'href' => '/categorias', 'icon' => '🗂️'],
+        ['label' => 'Pedidos', 'href' => '/pedidos', 'icon' => '📦'],
+        ['label' => 'Cupones', 'href' => '/cupones', 'icon' => '🏷️'],
+        ['label' => 'Envíos', 'href' => '/envios', 'icon' => '🚚'],
+        ['label' => 'Reportes', 'href' => '/reportes', 'icon' => '📊'],
+        ['label' => 'Usuarios y roles', 'href' => '/usuarios', 'icon' => '👥'],
+        ['label' => 'Archivos', 'href' => '/archivos', 'icon' => '🖼️'],
+        ['label' => 'Notificaciones', 'href' => '/notificaciones', 'icon' => '🔔'],
+        ['label' => 'Búsqueda', 'href' => '/buscar', 'icon' => '🔍'],
+        ['label' => 'Importar CSV', 'href' => '/importar', 'icon' => '📥'],
+        ['label' => 'API y tokens', 'href' => '/api', 'icon' => '🔌'],
+        ['label' => 'Auditoría', 'href' => '/auditoria', 'icon' => '📝'],
+        ['label' => 'Ajustes', 'href' => '/ajustes', 'icon' => '⚙️'],
+    ],
 ];

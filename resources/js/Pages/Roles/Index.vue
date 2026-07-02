@@ -163,7 +163,7 @@ const copyTempPassword = () => {
                                 <span
                                     v-for="label in user.roles"
                                     :key="label"
-                                    class="rounded-full bg-gradient-to-r from-[#7c3aed] to-[#c026d3] px-2.5 py-0.5 text-xs font-medium text-white"
+                                    class="rounded-full bg-gradient-to-r from-[#92400e] to-[#d97706] px-2.5 py-0.5 text-xs font-medium text-white"
                                 >
                                     {{ label }}
                                 </span>
@@ -228,7 +228,7 @@ const copyTempPassword = () => {
                             <span
                                 v-for="label in role.permissions"
                                 :key="label"
-                                class="rounded-full bg-violet-50 px-2.5 py-0.5 text-xs font-medium text-violet-700"
+                                class="rounded-full bg-amber-50 px-2.5 py-0.5 text-xs font-medium text-amber-700"
                             >
                                 {{ label }}
                             </span>

@@ -99,7 +99,7 @@ const submit = () => {
                             :class="[
                                 'rounded-full border px-3 py-1.5 text-sm font-medium transition',
                                 form.role_ids.includes(role.id)
-                                    ? 'border-transparent bg-gradient-to-r from-[#7c3aed] to-[#c026d3] text-white shadow'
+                                    ? 'border-transparent bg-gradient-to-r from-[#92400e] to-[#d97706] text-white shadow'
                                     : 'border-slate-300 bg-white text-slate-600 hover:border-slate-400',
                             ]"
                         >
