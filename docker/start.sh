@@ -7,11 +7,20 @@ cd /app || exit 1
 [ -f .env ] || cp .env.production .env
 
 # 2. Ensure a valid APP_KEY and export it so request handlers read the baked
-#    key (overrides any empty injected env var).
-if ! grep -q "^APP_KEY=base64:" .env 2>/dev/null; then
+#    key. Coolify may already inject a non-empty APP_KEY into the container
+#    environment, which takes priority over .env for Laravel (getenv()) — in
+#    that case `php artisan key:generate` REFUSES to run (it errors with
+#    "APP_KEY is already present in the environment") and .env keeps its
+#    empty value. We must NOT then export that empty .env value, or we'd
+#    clobber the perfectly good injected key and break encryption/sessions
+#    for every request. Only generate+write a new key when there's truly no
+#    usable key anywhere yet.
+if [ -z "$APP_KEY" ] && ! grep -q "^APP_KEY=base64:" .env 2>/dev/null; then
     php artisan key:generate --force || true
 fi
-APP_KEY="$(grep '^APP_KEY=' .env | head -1 | cut -d '=' -f2-)"
+if [ -z "$APP_KEY" ]; then
+    APP_KEY="$(grep '^APP_KEY=' .env | head -1 | cut -d '=' -f2-)"
+fi
 export APP_KEY
 
 # 3. Ensure the SQLite database file and its directory exist (default path).
